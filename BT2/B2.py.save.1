@@ -1,0 +1,14 @@
+from random import randint
+from time import sleep
+from datetime import datetime
+try:
+	while(1):	
+		temperature = randint(28,30)
+		humidity = randint(80,90)
+		time_now = datetime.now()
+		print("Update %s" %str(time_now))
+		print("Temp: %s" %str(temperature))
+			print("Hum: %s" %str(humidity))
+		sleep(1)
+except KeyboardInterrupt:
+	print("Chuong trinh ket thuc")

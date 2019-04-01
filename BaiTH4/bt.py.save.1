@@ -1,0 +1,64 @@
+from random import randint
+import pymysql
+import datetime
+db = pymysql.connect("localhost","root","huynam","bt")
+cursor = db.cursor()
+cursor.execute("DROP TABLE IF EXISTS bt_1")
+sql = """create table bt_1(
+	id int(10) primary key auto_increment,
+	sensorid int(3) not null,
+	long_a int(3) not null,
+	lat int(3) not null,
+	temp int(3) not null,
+	hum int(3) not null,
+	windspeed int(3) not null,
+	windirection char(3) not null
+	time datetime not null )"""
+cursor.execute(sql)
+
+for i in range (0,10):
+	x = randint(20,30)
+	y = randint(60,90)
+	z = randint(15,30)
+	now = datetime.datetime.now()
+	sql1="""insert into sensor_bt(temperature,humidity,dust,time)
+		values(%d,%d,%d,'%s')""" %(x,y,z,now)
+	cursor.execute(sql1) 
+	db.commit() 
+print("Databases trong table sensor_bt co cac kieu du lieu: Temp, Hum, Dust, Time")
+try:
+	while(1):
+		data = input("Nhap du lieu ban muon sap xep temperature | humidity | dust |: ")
+		value = input("Du lieu ban muon sap xep ASC | DESC: ")
+		if(data == "temperature"):
+			if(value == "ASC"):
+				sql = "select * from sensor_bt order by temperature ASC"
+			elif(value == "DESC"):
+				sql = "select * from sensor_bt order by temperature DESC"
+			cursor.execute(sql)
+			array = cursor.fetchall()
+
+		if(data == "humidity"):
+			if(value == "ASC"):
+				sql = "select * from sensor_bt order by humidity ASC"
+			elif(value == "DESC"):
+				sql = "select * from sensor_bt order by humidity DESC"
+			cursor.execute(sql)
+			array = cursor.fetchall()
+
+		if(data == "dust"):			if(value == "ASC"):
+				sql = "select * from sensor_bt where dust > 20 order by dust ASC"
+			cursor.execute(sql)
+			array = cursor.fetchall()
+		#if(data == "test"):
+		#        if(value == "a"):
+		#                sql = "select * from sensor_bt where temperature > 23 order by humidity ASC"
+		#        cursor.execute(sql)
+		#        array = cursor.fetchall()
+
+		for i in range (0,len(array)):
+				print(array[i][0],array[i][1],array[i][2],array[i][3],array[i][4].strftime('%Y-%m-%d %H:%M:%S'))
+except KeyboardInterrupt:
+	print("Chuong trinh ket thuc")
+db.close()
+

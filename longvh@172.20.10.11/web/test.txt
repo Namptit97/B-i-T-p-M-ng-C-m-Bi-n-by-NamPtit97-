@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>haha</title>
+	<link rel="stylesheet" type="text/css" href="vd2.css">
+</head>
+<body>
+<div id="menu_top">
+	<ul>
+		<li><a href="#">trang chu</a></li>
+		<li><a href="#">trang chu</a></li>
+		<li><a href="#">trang chu</a></li>
+		<li><a href="#">trang chu</a></li>
+	</ul>
+</div>
+<div id="main">
+	<div id="left">
+		<img src="nam.jpg">
+		<p>nam </p>
+	</div>
+	<div id="right">
+		<p>ho va ten</p>
+		<p>ho va ten</p>
+		<p>ho va ten</p>
+		<p>ho va ten</p>
+	</div>
+
+	
+</div>
+</body>
+</html>

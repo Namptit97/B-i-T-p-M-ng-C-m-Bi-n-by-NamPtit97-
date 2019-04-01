@@ -1,0 +1,35 @@
+from random import randint
+import pymysql
+import datetime
+db = pymysql.connect("localhost","root","huynam","wsn")
+cursor = db.cursor()
+cursor.execute("DROP TABLE IF EXISTS sensor_bt")
+sql = """create table sensor_bt(
+	id int(10) primary key auto_increment,
+	temperature int(3) not null,
+	humidity int(3) not null,
+	time datetime not null )"""
+cursor.execute(sql)
+db.close()
+for i in range (0,10):
+	x = randint(1,5)
+	y = randint(2,7)
+	now = datetime.datetime.now()
+	sql1="""insert into sensor_bt(temperature,humidity,time)
+		values(%d,%d,'%s')""" %(x,y,now)
+	cursor.execute(sql1) #thuc thi lenh sql
+	db.commit() #xac nhan them du lieu
+
+print("Databases trong table sensor_bt co cac kieu du lieu: Temp, Hum, Time")
+#data = input("Ban muon sap xep du lieu trong table the nao:\n1> Temp tang dan\n2> Hum giam dan\n")
+data = input("Nhap du lieu (temp | hum | time): ")
+value = input("Chieu sap xep (tang | giam): ")
+if(data == "Temp"):
+	if(value == "tang"):
+		sql = "select * from sensor_bt order by temperature ASC"
+	if(value == "giam"):
+		sql = "select * from sensor_bt order by temperature DESC"
+	cursor.execute(sql	array = cursor.fetchone()
+	print(array)
+
+

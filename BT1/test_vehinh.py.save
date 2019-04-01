@@ -1,0 +1,3 @@
+from vehinh import hinh_vuong,hinh_vuong_rong
+hinh_vuong(5)
+
